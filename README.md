@@ -84,8 +84,8 @@ The architecture allows the same transformation logic to be reused with differen
 
 Planned improvements:
 
-- Configuration-based transformation rules
-- Logging and validation controls
+- Transformation rules passed by parameter in a configuration file.
+- Extend Extract class to support API and database integrations (REST, SQL) for dynamic data ingestion
 - Workflow orchestration
 - Separate visualization module using Matplotlib
 
