@@ -47,7 +47,8 @@ Maps products into segment groups:
 
 ---
 
-<img width="989" height="682" alt="image" src="https://github.com/user-attachments/assets/bde8a611-2523-4a10-a399-62ffe6956807" />
+<img width="880" height="667" alt="image" src="https://github.com/user-attachments/assets/3a64b009-a719-419d-8194-f5220ac1631d" />
+
 
 
 ## 💼 Result of the process
