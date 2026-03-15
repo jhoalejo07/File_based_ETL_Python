@@ -4,7 +4,7 @@
 
 ## 📌 Executive Overview
 
-This project implements a **modular ETL pipeline in Python** to process structured file-based data (CSV, Excel, Parquet).
+This project implements a **modular ETL pipeline in Pandas Python** to process structured file-based data (CSV, Excel, Parquet).
 
 The goal is to replicate common SQL aggregation and transformation logic in a file-based environment using **Pandas**, while maintaining a clean separation of responsibilities between components.
 
