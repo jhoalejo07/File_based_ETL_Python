@@ -21,6 +21,10 @@ This separation allows reuse of transformation logic across different datasets.
 
 <br>
 
+## 💼 Pipelines work flow
+
+
+---
 <h2 align="center">💼 Business Use Cases</h2>
 
 <table width="100%">
@@ -187,13 +191,6 @@ Province, PatientID, AgeRangeLabel, Hospital, BillAmount
 </table>
 
 ---
-
-## 💼 Pipelines work flow
-
-
-
-
-
 
 
 ## 🧠 Skills Demonstrated
