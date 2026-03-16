@@ -1,3 +1,8 @@
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Processing-green)
+![Status](https://img.shields.io/badge/Project-Completed-success)
+
+
 # Modular SQL-Inspired ETL Pipeline (File-Based Data)
 
 <br>
@@ -194,7 +199,7 @@ Province, PatientID, AgeRangeLabel, Hospital, BillAmount
 </table>
 
 ---
-
+<br>
 
 ## 🧠 Skills Demonstrated
 
@@ -209,6 +214,7 @@ Province, PatientID, AgeRangeLabel, Hospital, BillAmount
 - GitHub workflow
 
 ---
+<br>
 
 ## 📊 Results
 
@@ -221,7 +227,9 @@ The architecture allows the same transformation logic to be reused with differen
 
 ---
 
-## 🚀 Next Steps
+<br>
+
+## 👣 Next Steps
 
 Planned improvements:
 
@@ -232,5 +240,39 @@ Planned improvements:
 
 > The visualization layer will remain outside the ETL scope to maintain architectural separation.
 
-Separate visualization module using Matplotlib
+---
+
+<br>
+
+## 🚀 Deploy and Run the Project
+
+Follow these steps to set up and execute the ETL pipelines locally.
+
+1. Clone the Repository
+    git clone https://github.com/jhoalejo07/ETL_Pipelines_Python_1.git <br>
+    cd ETL_Pipelines_Python_1 <br>
+   
+2. You may create a new Python environment (Recommended) or use an existing one.
+   
+3. Install the project dependencies using the requirements.txt file the environment should be activated  <br>
+     cd ETL_Pipelines_Python_1  <br>
+     pip install -r requirements.txt  <br>
+   
+4. Open the Project in Your Preferred IDE  <br>
+    Open the project folder using your preferred IDE or code editor (for example, VS Code, PyCharm, etc.). <br>
+   
+5. Execute an ETL Pipeline <br>
+    Navigate to the pipeline scripts located in: ./src/etl_pipeline/ <br>
+    Run any of the available pipelines: <br>
+       Pipeline_BillingHospital.py <br>
+       Pipeline_MarketingCampaign.py <br>
+       Pipeline_Rentalpy <br>
+    Example: <br>
+        python ./src/etl_pipeline/Pipeline_BillingHospital.py <br>
+   
+6. Verify the Output <br>
+    After execution, the generated output file will be available at: <br>
+    ./data/output/latest.xlsx <br>
+    Open the file to verify that the ETL pipeline executed successfully. <br>
+---
 
