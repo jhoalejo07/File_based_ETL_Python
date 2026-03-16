@@ -17,12 +17,14 @@ The goal is to create a reusable Extract module that accepts any CSV, Excel, or 
 ## 🏗️ Architecture
 
 This separation allows reuse of transformation logic across different datasets.
-
 <img width="989" height="682" alt="image" src="https://github.com/user-attachments/assets/a86cbe3f-2b73-4876-9e40-9a39011f1c30" />
+
+
 
 <br>
 
 ## 💼 Pipelines work flow
+<img width="1218" height="1068" alt="image" src="https://github.com/user-attachments/assets/51f94879-871c-41e8-a5e2-d9a1a255ca5b" />
 
 
 ---
