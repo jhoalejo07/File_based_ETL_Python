@@ -7,6 +7,7 @@
 This project implements a **modular ETL pipeline in Pandas Python** to process structured file-based data (CSV, Excel, Parquet).
 
 The goal is to create a reusable Extract module that accepts any CSV, Excel, or Parquet file. This module converts the input data into a Python dictionary, which is then passed to the specific Transformation module. The Transformation module applies business rules by calling a common library that replicates standard SQL functions in a file-based environment using **Pandas**. Finally, the processed data is passed to the Load module, which converts the output into an Excel file and applies versioning. This architecture ensures a clean separation of responsibilities between the components.
+<br>
 
 > ⚠️ This solution is not intended to replace SQL databases.  
 > It demonstrates how SQL-style business rules can be applied when working with external data files in a controlled and reusable architecture.
