@@ -1,4 +1,4 @@
-![Python](https://img.shields.io/badge/Python-3.10-blue)
+![Python](https://img.shields.io/badge/Python-3.12.4-blue)
 ![Pandas](https://img.shields.io/badge/Pandas-Data%20Processing-green)
 ![Status](https://img.shields.io/badge/Project-Completed-success)
 
@@ -9,28 +9,24 @@
 
 ## 📌 Executive Overview
 
-This project implements a **modular ETL pipeline in Pandas Python** to process structured file-based data (CSV, Excel, Parquet).
-
-The goal is to create a reusable Extract module that accepts any CSV, Excel, or Parquet file. This module converts the input data into a Python dictionary, which is then passed to the specific Transformation module. The Transformation module applies business rules by calling a common library that replicates standard SQL functions in a file-based environment using **Pandas**. Finally, the processed data is passed to the Load module, which converts the output into an Excel file and applies versioning. This architecture ensures a clean separation of responsibilities between the components.
+This project implements a reusable Extract module that accepts any CSV, Excel, or Parquet file. This module converts the input data into a Python dictionary, which is then passed to the specific Transformation module. The Transformation module applies business rules by calling a common library that replicates standard SQL functions in a file-based environment using **Pandas**. Finally, the processed data is passed to the reusable Load module, which converts the output into an Excel file and applies versioning. This architecture ensures a clean separation of responsibilities between the components.
 <br>
 
-> ⚠️ This solution is not intended to replace SQL databases.  
-> It demonstrates how SQL-style business rules can be applied when working with external data files in a controlled and reusable architecture.
+> ⚠️ The purpose of this project is to develop familiarity with Pandas by applying SQL-style business rules to file-based data sources.
 ---
 <br>
 
-## 🏗️ Architecture
 
-This separation allows reuse of transformation logic across different datasets.
-<img width="989" height="682" alt="image" src="https://github.com/user-attachments/assets/a86cbe3f-2b73-4876-9e40-9a39011f1c30" />
+### 🏗️ Architecture  
+This separation of responsibilities allows the reuse of the Extract and Load class across each pipeline, while the transformation logic invokes functions from the SQL-style Pandas library.
+
+<img width="852" height="599" alt="image" src="https://github.com/user-attachments/assets/a6833474-346a-4a55-a8a7-b9959bc44bd0" />
 
 
+### 💼 Pipelines Work Flow  
+During execution, three scenarios run independently, each calling the **Extract step** with different file types. The **Transformation step** applies SQL-style Pandas functions for each business need, and the **Load step** generates and versions the final report.
 
-<br>
-
-## 💼 Pipelines work flow
-<img width="1218" height="1068" alt="image" src="https://github.com/user-attachments/assets/51f94879-871c-41e8-a5e2-d9a1a255ca5b" />
-
+<img width="1172" height="1060" alt="image" src="https://github.com/user-attachments/assets/fb5b2d5e-3195-4ed0-879d-17d4e95203a2" />
 
 ---
 <h2 align="center">💼 Business Use Cases</h2>
@@ -250,8 +246,7 @@ Follow these steps to set up and execute the ETL pipelines locally.
 
 1. Clone the Repository
     git clone https://github.com/jhoalejo07/ETL_Pipelines_Python_1.git <br>
-    cd ETL_Pipelines_Python_1 <br>
-   
+      
 2. You may create a new Python environment (Recommended) or use an existing one.
    
 3. Install the project dependencies using the requirements.txt file the environment should be activated  <br>
