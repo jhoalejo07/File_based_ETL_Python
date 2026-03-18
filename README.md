@@ -197,30 +197,33 @@ Planned improvements:
 
 Follow these steps to set up and execute the ETL pipelines locally.
 
-1. Clone the Repository
-    git clone https://github.com/jhoalejo07/ETL_Pipelines_Python_1.git <br>
+1. **Clone the Repository**:  
+    git clone https://github.com/jhoalejo07/ETL_Pipelines_Python_1.git  
       
-2. You may create a new Python environment (Recommended) or use an existing one.
+2. **You may create a new Python environment (Recommended) or use an existing on.**  
    
-3. Install the project dependencies using the requirements.txt file the environment should be activated  <br>
-     cd ETL_Pipelines_Python_1  <br>
-     pip install -r requirements.txt  <br>
+3. **Install the project dependencies using the requirements.txt file the environment should be activated**   
+     cd ETL_Pipelines_Python_1    
+     pip install -r requirements.txt    
    
-4. Open the Project in Your Preferred IDE  <br>
-    Open the project folder using your preferred IDE or code editor (for example, VS Code, PyCharm, etc.). <br>
+4. **Open the Project in Your Preferred IDE**  
+    Open the project folder using your preferred IDE or code editor (for example, VS Code, PyCharm, etc.).  
    
-5. Execute an ETL Pipeline <br>
-    Navigate to the pipeline scripts located in: ./src/etl_pipeline/ <br>
-    Run any of the available pipelines: <br>
-       Pipeline_BillingHospital.py <br>
-       Pipeline_MarketingCampaign.py <br>
-       Pipeline_Rentalpy <br>
+5. **Execute an ETL Pipeline**  
+    Navigate to the pipeline scripts located in: ./src/etl_pipeline/    
+    Run any of the available pipelines:    
+       *Pipeline_BillingHospital.py* <br>
+       *Pipeline_MarketingCampaign.py* <br>
+       *Pipeline_Rentalpy* <br>
     Example: <br>
-        python ./src/etl_pipeline/Pipeline_BillingHospital.py <br>
+        ***python ./src/etl_pipeline/Pipeline_BillingHospital.py*** <br>
    
-6. Verify the Output <br>
+6. **Verify the Output** <br>
     After execution, the generated output file will be available at: <br>
     ./data/output/latest.xlsx <br>
     Open the file to verify that the ETL pipeline executed successfully. <br>
 ---
+
+
+
 
