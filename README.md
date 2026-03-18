@@ -49,55 +49,40 @@ During execution, three scenarios run independently, each calling the **Extract 
 <tr>
 <td valign="top">
 
-<b>Rentals_data.parquet</b>
-
+- **Rentals_data.parquet**:  
 Marketplace  
 Customer Site ID  
 Product  
-Monthly Rental Amount  
+Monthly Rental Amount
+- **Segments.parquet**:   
+Maps products into segment groups  
+• Seg 1–3   
+• Seg 4–6  
+</td>
 
-<br>
-
-<b>Segments.parquet</b>
-
-Maps products into segment groups:
-
-• Seg 1–3  
-• Seg 4–6
-
+<td valign="top">
+    
+- **tira_campaign_data.csv**:   
+- **nykaa_campaign_data.csv**:  
+- **purplle_campaign_data.csv**:   
+Campaign_Type     
+Language    
+Revenue   
+Date   
 </td>
 
 <td valign="top">
 
-<b>Campaign datasets</b>
-
-tira_campaign_data.csv  
-nykaa_campaign_data.csv  
-purplle_campaign_data.csv  
-
-<br>
-
-Campaign_Type  
-Language  
-Revenue  
-Date
-
-</td>
-
-<td valign="top">
-
-<b>hospital_billing_data.xlsx</b>
-
-<br>
-
-<b>age_ranges.xlsx</b>
-
-Maps ages into groups:
-
-• Child  
-• Adult  
-• Elderly
-
+- **hospital_billing_data.xlsx**: 
+Province     
+AgeRange     
+PatientID     
+BillAmount     
+- **age_ranges.xlsx**:    
+Maps ages into groups:   
+• Child   
+• Adult   
+• Elderly   
 </td>
 </tr>
 
@@ -109,83 +94,51 @@ Maps ages into groups:
 
 <td valign="top">
 
-• Include only rentals ≥ $25 per month  
-
-• Count how many units each customer rents  
-
-<b>Customer Classification</b>
-
-1–2 units  
-3–5 units  
-6+ units  
-
-• Pivot Segment values (Seg 1–3, Seg 4–6) into columns  
-
-• Group pivot results by MARKET_PLACE and Category  
-
-• Add subtotal rows by MARKET_PLACE  
-
-• Add grand total row across MARKET_PLACE  
-
-• Order final dataset by MARKET_PLACE and Category hierarchy  
+- **Column Standardization**: Normalize column names across datasets.  
+- **Data Type Conversion**: Convert *Equipment_Rental_Payment_Month* to numeric.  
+- **Data Integration (Join)**: Inner join on *Product_Code*.  
+- **Filtering Rule**: Keep records where *Equipment_Rental_Payment_Month ≥ 25*.  
+- **Column Selection**: Select *MARKET_PLACE, Product_Code, Segment, Customer_Site_ID*.  
+- **Aggregation**: Count *UnitCount* grouped by *MARKET_PLACE, Customer_Site_ID, Segment*.  
+- **Categorization**:  
+  - 1–2 → “1-2”  
+  - 3–5 → “3-5”  
+  - 6+ → “6 or more”  
+- **Pivot Transformation**: Convert *Segment* values into columns.  
+- **Totals (Rollup)**: Add subtotals and grand totals.  
+- **Sorting**: Order by *MARKET_PLACE* and *Category*.
 
 </td>
 
 <td valign="top">
 
-• Normalize column names  
-
-• Add Brand column (Nykaa, Purplle, Tira)  
-
-• Union datasets from all brands into one  
-
-• Convert Date column to date format  
-
-• Extract Month from Date  
-
-• Extract Year from Date  
-
-• Convert Revenue column to numeric  
-
-• Filter records where Revenue ≥ 1000  
-
-• Select columns for analysis  
-(Brand, Campaign_Type, Language, Revenue, Date, Month, Year)
-
-• Aggregate revenue by Brand, Year, Campaign_Type  
-
-• Sort final dataset by Brand, Year, Campaign_Type, SumRevenue  
+- **Column Standardization**: Normalize column names across all datasets.  
+- **Brand Attribution**: Add a *Brand* column to each dataset (*Nykaa*, *Purplle*, *Tira*).  
+- **Data Consolidation**: Combine all datasets using a UNION ALL operation.  
+- **Date Conversion**: Convert *Date* column to a proper date format.  
+- **Time Feature Extraction**: Derive *Month* and *Year* from the *Date*.  
+- **Data Type Conversion**: Ensure *Revenue* is numeric.  
+- **Filtering Rule**: Keep records where *Revenue ≥ 1000*.  
+- **Column Selection**: Select *Brand, Campaign_Type, Language, Revenue, Date, Month, Year*.  
+- **Aggregation**: Calculate total revenue (*SumRevenue*) grouped by *Brand, Year, Campaign_Type*.  
+- **Sorting**: Order results by *Brand, Year, Campaign_Type, SumRevenue*.   
 
 </td>
 
 <td valign="top">
 
-• Normalize column names in all input datasets  
-
-• Convert BillAmount column to numeric type  
-
-• Join billing data with AgeRange reference table using AgeRangeID (inner join)
-
-• Filter records where BillAmount ≥ 1000  
-
-• Select columns  
-Province, PatientID, AgeRangeLabel, Hospital, BillAmount  
-
-• Create Bill_Amt_Cat category column based on BillAmount  
-
-1.0–5k → 1000–5000  
-2.5k–10k → 5001–9999  
-3.10k+ → ≥ 10000  
-
-• Pivot AgeRangeLabel values (Child, Adult, Elderly) into columns  
-
-• Group pivot by Province and Bill_Amt_Cat  
-
-• Add subtotal rows by Province  
-
-• Add grand total row across all Provinces  
-
-• Order final results by Province and Bill_Amt_Cat hierarchy  
+- **Column Standardization**: Normalize column names across all datasets.  
+- **Data Type Conversion**: Ensure *BillAmount* is numeric.  
+- **Data Integration (Join)**: Inner join with *AgeRange* reference table on *AgeRangeID*.  
+- **Filtering Rule**: Keep records where *BillAmount ≥ 1000*.  
+- **Column Selection**: Retain *Province, PatientID, AgeRangeLabel, Hospital, BillAmount*.  
+- **Categorization (CASE Classification)**: Classify *BillAmount* into ranges:  
+  - 1000–5000 → “1.0-5k”  
+  - 5001–9999 → “2.5k-10k”  
+  - 10000+ → “3.10k +”  
+- **Pivot Transformation**: Convert *AgeRangeLabel* values (*Child, Adult, Elderly*) into columns.  
+- **Totals (Rollup)**: Add subtotal and grand total rows by *Province* and *Bill_Amt_Cat*.  
+- **Sorting / Ordering**: Order data respecting hierarchical grouping (*Province*, *Bill_Amt_Cat*).  
 
 </td>
 
