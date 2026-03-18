@@ -3,16 +3,19 @@
 ![Status](https://img.shields.io/badge/Project-Completed-success)
 
 
-# Modular SQL-Inspired ETL Pipeline (File-Based Data)
+# File-Based ETL with Reusable Modules and SQL-Like Logic
 
 <br>
 
 ## 📌 Executive Overview
 
-This project implements a reusable Extract module that accepts any CSV, Excel, or Parquet file. This module converts the input data into a Python dictionary, which is then passed to the specific Transformation module. The Transformation module applies business rules by calling a common library that replicates standard SQL functions in a file-based environment using **Pandas**. Finally, the processed data is passed to the reusable Load module, which converts the output into an Excel file and applies versioning. This architecture ensures a clean separation of responsibilities between the components.
+This project implements a modular, file-based ETL pipeline designed around a clear separation of concerns.     
+The Extract module ingests structured data from CSV, Excel, or Parquet files and standardizes it into an in-memory representation.     
+The Transformation layer applies business rules through a shared utility library that replicates common SQL operations using Pandas, enabling familiar, declarative-style data manipulation within a Python environment.     
+Finally, the Load module exports the transformed data to Excel with built-in versioning support.
 <br>
 
-> ⚠️ The purpose of this project is to develop familiarity with Pandas by applying SQL-style business rules to file-based data sources.
+> ⚠️ This project was developed to explore data transformations using Pandas by applying SQL-style business rules to file-based data sources.
 ---
 <br>
 
