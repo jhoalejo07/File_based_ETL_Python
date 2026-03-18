@@ -215,8 +215,8 @@ Follow these steps to set up and execute the ETL pipelines locally.
        *Pipeline_BillingHospital.py* <br>
        *Pipeline_MarketingCampaign.py* <br>
        *Pipeline_Rentalpy* <br>
-    Example: <br>
-        ***python ./src/etl_pipeline/Pipeline_BillingHospital.py*** <br>
+    Example(Pycharm): <br>
+        ***python -m src.etl_pipeline.Pipeline_MarketingCampaign*** <br>
    
 6. **Verify the Output** <br>
     After execution, the generated output file will be available at: <br>
