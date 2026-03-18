@@ -146,37 +146,6 @@ class SQl_df():
         return result
 
 
-    '''
-        def df_pivot_2values_to_2columns(self,
-            df,
-            group_col_1: str,
-            group_col_2: str,
-            value_column: str,
-            value_1: str,
-            value_2: str
-        ):
-        """
-
-        Pivots two specific values (value_1&2) from a single column (value_column) into two separate columns
-        with counts of how many times each value appears for each group (group_col_1&2).
-
-        """
-
-        base = (
-            df
-            .groupby([group_col_1, group_col_2], dropna=False)
-            .agg(
-                count_value_1=(value_column, lambda x: (x == value_1).sum()),
-                count_value_2=(value_column, lambda x: (x == value_2).sum()),
-                total_count=(value_column, "count")
-            )
-            .reset_index()
-        )
-        base = base.rename(columns={"count_value_1": value_1, "count_value_2": value_2, "total_count": "Grand_Total"})
-
-        return base
-    '''
-
     def df_pivot_values_to_columns(
             self,
             df,
@@ -216,15 +185,13 @@ class SQl_df():
 
         return pivot
 
-
-
     def df_groupby_rollup(self,
-                  base_df,
-                  group_col_1: str,
-                  group_col_2: str,
-                  grand_total_label: str = "Grand Total",
-                  total_label: str = "Total"
-                  ):
+                          base_df,
+                          group_col_1: str,
+                          group_col_2: str,
+                          grand_total_label: str = "Grand Total",
+                          total_label: str = "Total"
+                          ):
         """
         Creates subtotal by summing numeric columns grouped by the first column.
         """
@@ -286,5 +253,37 @@ class SQl_df():
 
         # Remove helper columns
         df = df.drop(columns=["_group1_sort", "_group2_sort"])
+
+        return df
+
+    def df_orderby(self, df: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
+        """
+        Order by specific columns.   Similar to SQL Order by.
+        """
+        return df.sort_values(by=columns)
+
+    def df_unionall(self, dataframes: list[str]) -> pd.DataFrame:
+        """
+        Concatenate dataframes with the same number of columns.   Similar to SQL UNION ALL.
+        """
+
+        return pd.concat(dataframes, axis=0)
+
+    def df_addcolumn(self, df: pd.DataFrame, new_column: str, value: str = None) -> pd.DataFrame:
+        """
+        Concatenate dataframes with the same number of columns.   Similar to SQL UNION ALL.
+        """
+        df[new_column] = value
+        return df
+
+    def df_ToDate(self, df: pd.DataFrame, date_column: str) -> pd.DataFrame:
+        """
+        Convert a DataFrame column to datetime.   Similar to SQL TO_DATE.
+        """
+        # Ensure the column is treated as string
+        df[date_column] = df[date_column].astype(str)
+
+        # Convert to datetime, infer format automatically, invalid parsing becomes NaT
+        df[date_column] = pd.to_datetime(df[date_column], errors='coerce', dayfirst=True)
 
         return df

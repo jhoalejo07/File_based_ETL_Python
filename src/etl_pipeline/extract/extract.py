@@ -29,7 +29,7 @@ class Extract:
             return pd.read_csv(file_path, **kwargs)
 
         elif extension in [".xls", ".xlsx"]:
-            return pd.read_excel(file_path, **kwargs)
+            return pd.read_excel(file_path, sheet_name=0, **kwargs)
 
         elif extension == ".parquet":
             return pd.read_parquet(file_path, **kwargs)

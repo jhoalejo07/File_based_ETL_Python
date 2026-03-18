@@ -5,7 +5,7 @@ from src.etl_pipeline.utils.SQL_with_Dataframes import SQl_df
 class Transform:
     def __init__(self, raw_data: dict):
         """
-        Transformation layer for Marketplace.
+        Transformation layer for Product Rentals.
         Receives raw data dictionary and executes SQL-like transformations.
         """
 

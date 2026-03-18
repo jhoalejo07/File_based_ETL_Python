@@ -5,7 +5,7 @@ from src.etl_pipeline.utils.SQL_with_Dataframes import SQl_df
 class Transform:
     def __init__(self, raw_data: dict):
         """
-        Transformation layer for Marketplace.
+        Transformation layer for Marketing Campaign.
         Receives raw data dictionary and executes SQL-like transformations.
         """
 
@@ -29,57 +29,41 @@ class Transform:
         # Dynamic unpacking of input datasets
         # Convert the dictionary of DataFrames into a list.
         # self.dataframes is a dictionary where:- keys: identifiers - values: pandas DataFrame
-        df1, df2 = list(self.dataframes.values())[:2]
+        df1, df2, df3 = list(self.dataframes.values())[:3]
+
+        df1 = self.sql_df.df_addcolumn(df1, 'Brand', 'Nykaa')
+        df2 = self.sql_df.df_addcolumn(df2, 'Brand', 'Purplle')
+        df3 = self.sql_df.df_addcolumn(df3, 'Brand', 'Tira')
+
+        df = self.sql_df.df_unionall([df1, df2, df3])
+
+        df = self.sql_df.df_ToDate(df, 'Date')
+
+        # Extract Time Features
+        df['Month'] = df['Date'].dt.month
+        df['Year'] = df['Date'].dt.year
 
         # Ensure BillAmount is numeric
-        df = self.sql_df.convert_to_numeric(df1, 'BillAmount')
-
-        # Relational join with AgeRange reference table
-        df = self.sql_df.join_dataframes(df, df2, 'AgeRangeID', 'inner')
+        df = self.sql_df.convert_to_numeric(df, 'Revenue')
 
         # Business threshold filter
-        df = self.sql_df.apply_filters(df, 'BillAmount', '>=', 1000)
+        df = self.sql_df.apply_filters(df, 'Revenue', '>=', 1000)
 
         # Projection
         df = self.sql_df.df_select_columns(
             df,
-            ['Province', 'PatientID', 'AgeRangeLabel', 'Hospital', 'BillAmount']
+            ['Brand', 'Campaign_Type', 'Language', 'Revenue', 'Date', 'Month', 'Year']
         )
 
-        # CASE classification for billing ranges
-        df = self.sql_df.df_case(
-            df=df,
-            columns_to_keep=['Province', 'AgeRangeLabel', 'PatientID', 'BillAmount'],
-            value_column='BillAmount',
-            ranges=[(1000, 5000), (5001, 9999)],
-            labels=['1.0-5k', '2.5k-10k'],
-            default_label='3.10k +',
-            new_column_name='Bill_Amt_Cat'
-        )
-
-        # Pivot age groups into columns
-        base = self.sql_df.df_pivot_values_to_columns(
-            df=df,
-            group_col_1='Province',
-            group_col_2='Bill_Amt_Cat',
-            value_column='AgeRangeLabel',
-            values=['Child', 'Adult', 'Elderly']
-        )
-
-        # Add subtotal and grand total rows (ROLLUP equivalent)
-        totals = self.sql_df.df_groupby_rollup(
-            base_df=base,
-            group_col_1='Province',
-            group_col_2='Bill_Amt_Cat'
-        )
-
-        df = pd.concat([base, totals], ignore_index=True)
-
-        # Order data respecting grouping hierarchy
-        df = self.sql_df.df_orderby_grouping(
+        # Aggregate count per grouping dimensions
+        df = self.sql_df.df_groupby(
             df,
-            group_col_1='Province',
-            group_col_2='Bill_Amt_Cat'
+            ['Brand', 'Year', 'Campaign_Type'],
+            'SumRevenue',
+            'Revenue',
+            "sum"
         )
 
+        df = self.sql_df.df_orderby(df, ['Brand', 'Year', 'Campaign_Type', 'SumRevenue'])
+       
         return df
