@@ -17,8 +17,6 @@ Finally, the Load module exports the transformed data to Excel with built-in ver
 
 > ⚠️ This project was developed to explore data transformations using Pandas by applying SQL-style business rules to file-based data sources.
 ---
-<br>
-
 
 ### 🏗️ Architecture  
 This separation of responsibilities allows the reuse of the Extract and Load class across each pipeline, while the transformation logic invokes functions from the SQL-style Pandas library.
